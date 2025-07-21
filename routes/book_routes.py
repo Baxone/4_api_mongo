@@ -30,3 +30,9 @@ async def get_book_by_id(book_id: str):
 @router.put("/{book_id}", status_code=200)
 async def update_book(book_id: str, book_data: BookCreate):
     return await book_controllers.update_book(book_id, book_data)
+
+
+# DELETE borrar un libro
+@router.delete("/{book_id}", status_code=200)
+async def delete_book_by_id(book_id: str):
+    return await book_controllers.delete_book_by_id(book_id)
