@@ -26,3 +26,17 @@ async def create_book(book_data: BookCreate):
         return book_helper(created)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
+
+# controlador para obtener la lista de libros
+
+
+async def get_book_list():
+    try:
+        books = []
+        # find no puede ser asincrono por que si saltariamos al for sin tener el array cargado.
+        result = book_collection.find({})
+        async for item in result:
+            books.append(book_helper(item))
+        return books
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
